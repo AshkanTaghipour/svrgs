@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="SVR-GS project page.">
+  <meta name="keywords" content="SVR-GS, 3D Gaussian Splatting, 3DGS, pruning, masks, novel view synthesis, CUDA">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SVR-GS: Spatially Variant Regularization for Probabilistic Masks in 3D Gaussian Splatting</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <!-- FontAwesome icons (as in Nerfies template) -->
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+
+  <style>
+    .muted-note { color: rgba(0,0,0,0.65); font-size: 0.95rem; }
+    .btn-placeholder { cursor: default; opacity: 0.92; }
+
+    .diagram-card {
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      margin-bottom: 1.25rem;
+    }
+    .diagram-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #fff;
+    }
+    .diagram-caption {
+      padding: 0.75rem 0.9rem;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      font-weight: 600;
+    }
+
+    /* --- Single video layout (clean, centered, no black side margins) --- */
+    .gallery-card {
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      display: inline-block;
+      width: fit-content;
+      max-width: 100%;
+    }
+    .video-wrap{
+      background: transparent;
+      display:flex;
+      justify-content:center;
+      padding: 0;
+    }
+    .gallery-video{
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 80vh;
+      object-fit: contain;
+      display:block;
+      background: transparent;
+    }
+  </style>
+</head>
+
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <h1 class="title is-1 publication-title">
+            SVR-GS: Spatially Variant Regularization for Probabilistic Masks in<br>
+            3D Gaussian Splatting
+          </h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Ashkan Taghipour<sup>1</sup>,</span>
+            <span class="author-block">Vahid Naghshin<sup>2</sup>,</span>
+            <span class="author-block">Benjamin Southwell<sup>2</sup>,</span>
+            <span class="author-block">Farid Boussaid<sup>3</sup>,</span>
+            <span class="author-block">Hamid Laga<sup>4</sup>,</span>
+            <span class="author-block">Mohammed Bennamoun<sup>1</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors" style="margin-top: 0.4rem;">
+            <span class="author-block">
+              <sup>1</sup>Department of Computer Science and Software Engineering, The University of Western Australia, Australia.
+            </span><br>
+            <span class="author-block">
+              <sup>2</sup>Dolby Laboratories, Sydney, Australia.
+            </span><br>
+            <span class="author-block">
+              <sup>3</sup>Department of Electrical, Electronics and Computer Engineering, The University of Western Australia, Australia.
+            </span><br>
+            <span class="author-block">
+              <sup>4</sup>School of Information Technology, Murdoch University, Australia.
+            </span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+
+              <!-- arXiv -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2509.11116" target="_blank" rel="noopener"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+              <!-- Code (coming soon) -->
+              <span class="link-block">
+                <span class="external-link button is-normal is-rounded is-dark btn-placeholder">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code (coming soon)</span>
+                </span>
+              </span>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Abstract -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            3D Gaussian Splatting (3DGS) enables fast, highquality novel view synthesis but relies on densification followed
+            by pruning to optimize the number of Gaussians. Existing mask-based pruning, such as MaskGS, regularizes the global
+            mean of the mask, which is misaligned with the local perpixel (per-ray) reconstruction loss that determines image quality
+            along individual camera rays. This paper introduces SVR-GS, a spatially variant regularizer that renders a per-pixel spatial
+            mask from each Gaussian’s effective contribution along the ray, thereby applying sparsity pressure where it matters: on lowimportance
+            Gaussians. We explore three spatial-mask aggregation strategies, implement them in CUDA, and conduct a gradient analysis to motivate our
+            final design. Extensive experiments on Tanks&Temples, Deep Blending, and Mip-NeRF360 datasets demonstrate that, on average across the three
+            datasets, the proposed SVR-GS reduces the number of Gaussians by 1.79× compared to MaskGS and 5.63× compared to 3DGS, while incurring only
+            0.50 dB and 0.40 dB PSNR drops, respectively. These gains translate into significantly smaller, faster, and more memory-efficient models,
+            making them well-suited for real-time applications such as robotics, AR/VR, and mobile perception.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Method -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+
+        <div class="diagram-card">
+          <img src="./static/diagrams/main_diagram.png" alt="SVR-GS main diagram">
+          <div class="diagram-caption">Overview of SVR-GS</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Visual Results -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Visual Results</h2>
+
+        <div class="content has-text-centered" style="margin-bottom: 0.75rem;"></div>
+
+        <div class="columns is-centered">
+          <div class="column is-full has-text-centered">
+            <div class="gallery-card">
+              <div class="video-wrap">
+                <video class="gallery-video" controls playsinline preload="metadata">
+                  <source src="./static/videos/demo.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="content" style="padding: 0.6rem 0.9rem;">
+                <a href="./static/videos/demo.mp4" target="_blank" rel="noopener">Open video</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
