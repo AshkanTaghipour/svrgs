@@ -15,12 +15,15 @@
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.svg">
 
-  <!-- FontAwesome icons (as in Nerfies template) -->
   <script defer src="./static/js/fontawesome.all.min.js"></script>
 
   <style>
     .muted-note { color: rgba(0,0,0,0.65); font-size: 0.95rem; }
     .btn-placeholder { cursor: default; opacity: 0.92; }
+    .publication-links { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.5rem; }
+    .link-block { display: inline-flex; align-items: center; }
+    .intern-note { color: #c00; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .dolby-pink { color: #e91e8c; }
 
     .diagram-card {
       border-radius: 14px;
@@ -41,7 +44,6 @@
       font-weight: 600;
     }
 
-    /* --- Single video layout (clean, centered, no black side margins) --- */
     .gallery-card {
       border-radius: 14px;
       overflow: hidden;
@@ -83,11 +85,11 @@
           </h1>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block">Ashkan Taghipour<sup>1</sup>,</span>
+            <span class="author-block"><strong>Ashkan Taghipour</strong><sup>1</sup>,</span>
             <span class="author-block">Vahid Naghshin<sup>2</sup>,</span>
             <span class="author-block">Benjamin Southwell<sup>2</sup>,</span>
             <span class="author-block">Farid Boussaid<sup>3</sup>,</span>
-            <span class="author-block">Hamid Laga<sup>4</sup>,</span>
+            <span class="author-block">Hamid Laga,</span>
             <span class="author-block">Mohammed Bennamoun<sup>1</sup></span>
           </div>
 
@@ -96,20 +98,17 @@
               <sup>1</sup>Department of Computer Science and Software Engineering, The University of Western Australia, Australia.
             </span><br>
             <span class="author-block">
-              <sup>2</sup>Dolby Laboratories, Sydney, Australia.
+              <sup>2</sup><span class="dolby-pink">Dolby</span> Laboratories, Sydney, Australia.
             </span><br>
             <span class="author-block">
               <sup>3</sup>Department of Electrical, Electronics and Computer Engineering, The University of Western Australia, Australia.
-            </span><br>
-            <span class="author-block">
-              <sup>4</sup>School of Information Technology, Murdoch University, Australia.
             </span>
           </div>
 
           <div class="column has-text-centered">
+            <p class="intern-note">This work was done while Ashkan Taghipour was a research intern at <span class="dolby-pink">Dolby</span> Laboratories, Sydney, Australia.</p>
             <div class="publication-links">
 
-              <!-- arXiv -->
               <span class="link-block">
                 <a href="https://arxiv.org/abs/2509.11116" target="_blank" rel="noopener"
                    class="external-link button is-normal is-rounded is-dark">
@@ -118,7 +117,6 @@
                 </a>
               </span>
 
-              <!-- Code (coming soon) -->
               <span class="link-block">
                 <span class="external-link button is-normal is-rounded is-dark btn-placeholder">
                   <span class="icon"><i class="fab fa-github"></i></span>
@@ -135,7 +133,6 @@
   </div>
 </section>
 
-<!-- Abstract -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -160,7 +157,6 @@
   </div>
 </section>
 
-<!-- Method -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -177,7 +173,6 @@
   </div>
 </section>
 
-<!-- Visual Results -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
