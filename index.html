@@ -68,6 +68,40 @@
       display:block;
       background: transparent;
     }
+
+    .image-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    .image-card {
+      flex: 1 1 300px;
+      max-width: 400px;
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+    .image-card-title {
+      padding: 0.75rem 0.9rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .image-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .image-card-caption {
+      padding: 0.75rem 0.9rem;
+      font-size: 0.85rem;
+      color: rgba(0,0,0,0.7);
+      text-align: justify;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
   </style>
 </head>
 
@@ -194,6 +228,39 @@
               </div>
             </div>
           </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Image/Splats/Points</h2>
+
+        <div class="image-gallery">
+
+          <div class="image-card">
+            <div class="image-card-title">Rendered Image</div>
+            <img src="./static/diagrams/garden_rendered_image.png" alt="Rendered Image">
+            <div class="image-card-caption">Rendered image from an arbitrary novel view.</div>
+          </div>
+
+          <div class="image-card">
+            <div class="image-card-title">Overlaid Gaussians</div>
+            <img src="./static/diagrams/garden_splatts_overlay.png" alt="Overlaid Gaussians">
+            <div class="image-card-caption">Each ellipse is the image-space footprint of a projected 3D Gaussian (projected covariance contour). At full resolution, many small ellipses appear on fine structures (e.g., leaves, table surface).</div>
+          </div>
+
+          <div class="image-card">
+            <div class="image-card-title">Overlaid Points</div>
+            <img src="./static/diagrams/garden_points_overlay.png" alt="Overlaid Points">
+            <div class="image-card-caption">Blue points mark the projected means (image-plane centers) of the 3D Gaussians. Denser clusters indicate higher Gaussian population in those regions.</div>
+          </div>
+
         </div>
 
       </div>
